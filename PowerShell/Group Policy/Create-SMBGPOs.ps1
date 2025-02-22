@@ -1,0 +1,90 @@
+#Requires -RunAsAdministrator
+
+# This creates ten Group Policy Objects (GPO's)
+#  GPO  1 sets the registry to Disable Server Message Block (SMB) v1
+#  GPO  2 sets the registry to Disable SMB v2
+#  GPO  3 sets the registry to Enable SMB signing as available
+#  GPO  4 sets the registry to Require/Force SMB signing
+#  GPO  5 sets the registry to Disable Link-Local Multicast Name Resolution (LLMNR)
+#  GPO  6 sets the registry to Enable SMB v1 as a rollback for if GPO 1 creates issues in the environment
+#  GPO  7 sets the registry to Enable SMB v2 as a rollback for if GPO 2 creates issues in the environment
+#  GPO  8 sets the registry to Disable SMB signing as a rollback for if GPO 3 creates issues in the environment
+#  GPO  9 sets the registry to Disable requiring/forcing SMB signing as a rollback for if GPO 4 creates issues in the environment
+#  GPO 10 sets the registry to Enable LLMNR as a rollback for if GPO 5 creates issues in the environment
+
+# Import the Group Policy Module
+Import-Module GroupPolicy
+
+# Create GPO 1
+New-GPO -Name "PROD | Disable SMB v1" -Comment "Sets the LAN Manager authentication level in the Computer Configuration"
+
+# Create GPO 2
+New-GPO -Name "PROD | Disable SMB v2" -Comment "Sets the LAN Manager authentication level in the Computer Configuration"
+
+# Create GPO 3
+New-GPO -Name "PROD | Enable SMB Signing" -Comment "Enables SMB Signing via the registry"
+
+# Create GPO 4
+New-GPO -Name "PROD | Require SMB Signing" -Comment "Requires SMB Signing via the registry"
+
+# Create GPO 5
+New-GPO -Name "PROD | Disable LLMNR" -Comment "Disables LLMNR via the registry"
+
+# Set GPO 1
+Set-GPPrefRegistryValue -Name "PROD | Disable SMB v1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB1" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+
+# Set GPO 2
+Set-GPPrefRegistryValue -Name "PROD | Disable SMB v2" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB2" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+
+# Set GPO 3
+Set-GPPrefRegistryValue -Name "PROD | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -ValueName "EnableSecuritySignature" -Value 1 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -ValueName "EnableSecuritySignature" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
+
+# Set GPO 4
+Set-GPPrefRegistryValue -Name "PROD | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -ValueName "RequireSecuritySignature" -Value 1 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -ValueName "RequireSecuritySignature" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
+
+# Set GPO 5
+Set-GPPrefRegistryValue -Name "PROD | Disable LLMNR" -Context Computer -Key "HKLM\Software\policies\Microsoft\Windows NT\DNSClient" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable LLMNR" -Context Computer -Key "HKLM\Software\policies\Microsoft\Windows NT\DNSClient" -ValueName "EnableMulticast" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+
+# Create Rollback GPO 1
+New-GPO -Name "Rollback | Disable SMB v1" -Comment "Sets the LAN Manager authentication level in the Computer Configuration"
+
+# Create Rollback GPO 2
+New-GPO -Name "Rollback | Disable SMB v2" -Comment "Sets the LAN Manager authentication level in the Computer Configuration"
+
+# Create Rollback GPO 3
+New-GPO -Name "Rollback | Enable SMB Signing" -Comment "Disables SMB Signing via the registry"
+
+# Create Rollback GPO 4
+New-GPO -Name "Rollback | Require SMB Signing" -Comment "Removes requirement for SMB Signing via the registry"
+
+# Create Rollback GPO 5
+New-GPO -Name "Rollback | Disable LLMNR" -Comment "Enables LLMNR via the registry"
+
+# Set Rollback GPO 1
+Set-GPPrefRegistryValue -Name "Rollback | Disable SMB v1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB1" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
+
+# Set Rollback GPO 2
+Set-GPPrefRegistryValue -Name "Rollback | Disable SMB v2" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB2" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
+
+# Set Rollback GPO 3
+Set-GPPrefRegistryValue -Name "Rollback | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -ValueName "EnableSecuritySignature" -Value 0 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -ValueName "EnableSecuritySignature" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
+
+# Set Rollback GPO 4
+Set-GPPrefRegistryValue -Name "Rollback | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -ValueName "RequireSecuritySignature" -Value 0 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Require SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" -ValueName "RequireSecuritySignature" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
+
+# Set Rollback GPO 5
+Set-GPPrefRegistryValue -Name "Rollback | Disable LLMNR" -Context Computer -Key "HKLM\Software\policies\Microsoft\Windows NT\DNSClient" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable LLMNR" -Context Computer -Key "HKLM\Software\policies\Microsoft\Windows NT\DNSClient" -ValueName "EnableMulticast" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
