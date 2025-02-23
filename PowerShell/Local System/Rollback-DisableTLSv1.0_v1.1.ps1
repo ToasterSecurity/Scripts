@@ -1,5 +1,9 @@
 #Requires -RunAsAdministrator
 
+# Start logging
+$DefaultLogLocation = "C:\Windows\Logs\Rollback-DisableTLSv1.0_v1.1-Log.txt"
+Start-Transcript -Path $DefaultLogLocation
+
 # This sets the registry to enable Transport Layer Security (TLS) 1.0 and 1.1 on the local system
 #  A reboot is required for this to take effect
 
@@ -20,3 +24,6 @@ If (($response -eq 'Y')  -or ($response -eq "Yes")){
         Read-Host "The system will need to reboot before the changes will take effect."
     }
 }
+
+#Stop logging
+Stop-Transcript

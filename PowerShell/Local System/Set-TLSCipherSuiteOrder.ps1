@@ -1,5 +1,9 @@
 #Requires -RunAsAdministrator
 
+# Start logging
+$DefaultLogLocation = "C:\Windows\Logs\Set-TLSCipherSuiteOrder-Log.txt"
+Start-Transcript -Path $DefaultLogLocation
+
 # This sets the registry to set the cipher suite order on the local system
 #  A reboot is required for this to take effect
 
@@ -31,3 +35,6 @@ If (($response -eq 'Y')  -or ($response -eq "Yes")){
         Read-Host "The system will need to reboot before the changes will take effect."
     }
 }
+
+#Stop logging
+Stop-Transcript

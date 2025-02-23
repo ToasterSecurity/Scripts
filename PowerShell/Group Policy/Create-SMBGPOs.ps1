@@ -1,5 +1,9 @@
 #Requires -RunAsAdministrator
 
+# Start logging
+$DefaultLogLocation = "C:\Windows\Logs\Create-SMBGPOs-Log.txt"
+Start-Transcript -Path $DefaultLogLocation
+
 # This creates ten Group Policy Objects (GPO's)
 #  GPO  1 sets the registry to Disable Server Message Block (SMB) v1 Server
 #  GPO  2 sets the registry to Disable SMB v2
@@ -120,3 +124,6 @@ Set-GPPrefRegistryValue -Name "Rollback | Disable SMB v1 Client" -Context Comput
 # Set Rollback GPO 7
 Set-GPPrefRegistryValue -Name "Rollback | Disable SMB v2 Client" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\services\mrxsmb20" -ValueName "Start" -Value 3 -Type "DWORD" -Order 1 -Action "Update"
 Set-GPPrefRegistryValue -Name "Rollback | Disable SMB v2 Client" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation" -ValueName "DependOnService" -Value "Bowser","MRxSmb20","NSI" -Type "MultiString" -Order 2 -Action "Update"
+
+#Stop logging
+Stop-Transcript
