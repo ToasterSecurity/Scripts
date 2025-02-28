@@ -28,7 +28,9 @@ C:\PS> powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -Window
 
 #>
 
-Start-Transcript -Path "C:\Windows\Logs\Disable-PowerShellv2.txt"
+# Start logging
+$DefaultLogLocation = "C:\Windows\Logs\Disable-PowerShellv2.txt"
+Start-Transcript -Path $DefaultLogLocation
 
 # Get the current OS version
 $OSVersion = (get-itemproperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name ProductName).ProductName
@@ -55,4 +57,5 @@ switch -regex ($OSVersion) {
     }
 }
 
+#Stop logging
 Stop-Transcript
