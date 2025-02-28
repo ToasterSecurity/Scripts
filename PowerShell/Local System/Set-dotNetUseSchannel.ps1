@@ -25,7 +25,7 @@ If (($response -eq 'Y')  -or ($response -eq "Yes")){
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SystemDefaultTlsVersions" -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -Value 1
 
-    $rebootResponse = Read-Host "This sets the registry to enable .net to use the Windows SCHANNEL configuration instead of the native .net TLS configuration on the local system. Would you like to make the required registry changes? (Yes/No)"
+    $rebootResponse = Read-Host "The registry changes have been made. A reboot is required before they will take effect. Do you want to reboot now? (Yes/No)"
     If (($rebootResponse -eq 'Y') -or ($rebootResponse -eq "Yes")){
         shutdown /g /c " Enable .net to use the Windows SCHANNEL configuration instead of the native .net TLS configuration" /d P:2:4
     } Else {

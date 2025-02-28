@@ -17,7 +17,7 @@ If (($response -eq 'Y')  -or ($response -eq "Yes")){
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Name "Enabled" -Value 1
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Name "DisabledByDefault" -Value 0
 
-    $rebootResponse = Read-Host "This sets the registry to enable TLS 1.0 and 1.1 on the local system. Would you like to make the required registry changes? (Yes/No)"
+    $rebootResponse = Read-Host "The registry changes have been made. A reboot is required before they will take effect. Do you want to reboot now? (Yes/No)"
     If (($rebootResponse -eq 'Y') -or ($rebootResponse -eq "Yes")){
         shutdown /g /c "Enable TLS 1.0 and 1.1" /d P:2:4
     } Else {
