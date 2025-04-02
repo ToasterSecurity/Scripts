@@ -27,7 +27,7 @@ Import-Module GroupPolicy
 New-GPO -Name "PROD | Disable SMB v1 Server" -Comment "Sets the registry to Disable SMB v1 Server"
 
 # Create GPO 2
-New-GPO -Name "PROD | Disable SMB v2" -Comment "Sets the LAN Manager authentication level in the Computer Configuration"
+New-GPO -Name "PROD | Disable SMB v2 Server" -Comment "Sets the registry to Disable SMB v2 Server"
 
 # Create GPO 3
 New-GPO -Name "PROD | Enable SMB Signing" -Comment "Enables SMB Signing via the registry"
@@ -45,10 +45,10 @@ New-GPO -Name "PROD | Disable SMB v1 Client" -Comment "Sets the registry to Disa
 New-GPO -Name "PROD | Disable SMB v2 Client" -Comment "Sets the registry to Disable SMB v2 Client"
 
 # Set GPO 1
-Set-GPPrefRegistryValue -Name "PROD | Disable SMB v1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB1" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SMB v1 Server" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB1" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
 
 # Set GPO 2
-Set-GPPrefRegistryValue -Name "PROD | Disable SMB v2" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB2" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SMB v2 Server" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -ValueName "SMB2" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
 
 # Set GPO 3
 Set-GPPrefRegistryValue -Name "PROD | Enable SMB Signing" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Services\LanManWorkstation\Parameters" -Order 1 -Action "Update"
