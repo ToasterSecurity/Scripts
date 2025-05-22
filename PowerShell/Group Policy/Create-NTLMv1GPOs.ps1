@@ -12,16 +12,16 @@ Start-Transcript -Path $DefaultLogLocation
 Import-Module GroupPolicy
 
 # Create GPO 1
-New-GPO -Name "Disable NTLMv1 and older" -Comment "Sets Computer Configuration variable Network security: LAN Manager authentication level"
+New-GPO -Name "PROD | Disable NTLMv1 and older" -Comment "Sets Computer Configuration variable Network security: LAN Manager authentication level"
 
 # Set GPO 1
-Set-GPPrefRegistryValue -Name "Disable NTLMv1 and older" -Context Computer -Key "HKLM\System\CurrentControlSet\Control\Lsa" -ValueName "LmCompatibilityLevel" -Value 5 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable NTLMv1 and older" -Context Computer -Key "HKLM\System\CurrentControlSet\Control\Lsa" -ValueName "LmCompatibilityLevel" -Value 5 -Type "DWORD" -Order 1 -Action "Update"
 
 # Create Rollback GPO 1
-New-GPO -Name "Rollback Disable NTLMv1 and older" -Comment "Sets Computer Configuration variable Network security: LAN Manager authentication level"
+New-GPO -Name "Rollback | Disable NTLMv1 and older" -Comment "Sets Computer Configuration variable Network security: LAN Manager authentication level"
 
 # Set Rollback GPO 1
-Set-GPPrefRegistryValue -Name "Rollback Disable NTLMv1 and older" -Context Computer -Key "HKLM\System\CurrentControlSet\Control\Lsa" -ValueName "LmCompatibilityLevel" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable NTLMv1 and older" -Context Computer -Key "HKLM\System\CurrentControlSet\Control\Lsa" -ValueName "LmCompatibilityLevel" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
 
 #Stop logging
 Stop-Transcript

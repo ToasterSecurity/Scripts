@@ -21,92 +21,92 @@ Start-Transcript -Path $DefaultLogLocation
 Import-Module GroupPolicy
 
 # Create GPO 0
-New-GPO -Name "Disable SSL v3" -Comment "Sets the registry values to disable SSL v3 for shannel"
+New-GPO -Name "PROD | Disable SSL v3" -Comment "Sets the registry values to disable SSL v3 for shannel"
 # Create GPO 1
-New-GPO -Name "Enable SCHANNEL for .net" -Comment "Sets the registry values to enable the .net framework to use shannel and strong cryptographic ciphers"
+New-GPO -Name "PROD | Enable SCHANNEL for .net" -Comment "Sets the registry values to enable the .net framework to use shannel and strong cryptographic ciphers"
 # Create GPO 2
-New-GPO -Name "Disable TLS 1.0/1.1" -Comment "Sets the registry values to disable the TLS 1.0 and 1.1 for shannel"
+New-GPO -Name "PROD | Disable TLS 1.0/1.1" -Comment "Sets the registry values to disable the TLS 1.0 and 1.1 for shannel"
 # Create GPO 3
-New-GPO -Name "Set Cipher Suite Order 2016" -Comment "Sets the registry values to set the cipher suite order for server 2016"
+New-GPO -Name "PROD | Set Cipher Suite Order 2016" -Comment "Sets the registry values to set the cipher suite order for server 2016"
 # Create GPO 4
-New-GPO -Name "Set Cipher Suite Order 2019" -Comment "Sets the registry values to set the cipher suite order for server 2019"
+New-GPO -Name "PROD | Set Cipher Suite Order 2019" -Comment "Sets the registry values to set the cipher suite order for server 2019"
 # Create GPO 5
-New-GPO -Name "Set Cipher Suite Order 2022" -Comment "Sets the registry values to set the cipher suite order for server 2022"
+New-GPO -Name "PROD | Set Cipher Suite Order 2022" -Comment "Sets the registry values to set the cipher suite order for server 2022"
 
 # Set GPO 0
-Set-GPPrefRegistryValue -Name "Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0" -Order 1 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -Order 2 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable SSL v3" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
 
 # Set GPO 1
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 2 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 3 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 5 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 6 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 7 -Action "Update"
-Set-GPPrefRegistryValue -Name "Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 8 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 5 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 6 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 1 -Type "DWORD" -Order 7 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 1 -Type "DWORD" -Order 8 -Action "Update"
 
 # Set GPO 2
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0" -Order 1 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -Order 2 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1" -Order 5 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Order 6 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 7 -Action "Update"
-Set-GPPrefRegistryValue -Name "Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 8 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 4 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1" -Order 5 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Order 6 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "Enabled" -Value 0 -Type "DWORD" -Order 7 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "DisabledByDefault" -Value 1 -Type "DWORD" -Order 8 -Action "Update"
 
 # Set GPO 3
-Set-GPPrefRegistryValue -Name "Set Cipher Suite Order 2016" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Set Cipher Suite Order 2016" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
 
 # Set GPO 4
-Set-GPPrefRegistryValue -Name "Set Cipher Suite Order 2019" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Set Cipher Suite Order 2019" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
 
 # Set GPO 5
-Set-GPPrefRegistryValue -Name "Set Cipher Suite Order 2022" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_AES_256_GCM_SHA512,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "PROD | Set Cipher Suite Order 2022" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_AES_256_GCM_SHA512,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Update"
 
 # Create Rollback GPO 1
-New-GPO -Name "Rollback Enable SCHANNEL for .net" -Comment "Sets the registry values to enable the .net framework to use shannel and strong cryptographic ciphers"
+New-GPO -Name "Rollback | Enable SCHANNEL for .net" -Comment "Sets the registry values to enable the .net framework to use shannel and strong cryptographic ciphers"
 # Create Rollback GPO 2
-New-GPO -Name "Rollback Disable TLS 1.0/1.1" -Comment "Sets the registry values to disable the TLS 1.0 and 1.1 for shannel"
+New-GPO -Name "Rollback | Disable TLS 1.0/1.1" -Comment "Sets the registry values to disable the TLS 1.0 and 1.1 for shannel"
 # Create Rollback GPO 3
-New-GPO -Name "Rollback Set Cipher Suite Order 2016" -Comment "Sets the registry values to set the cipher suite order for server 2016"
+New-GPO -Name "Rollback | Set Cipher Suite Order 2016" -Comment "Sets the registry values to set the cipher suite order for server 2016"
 # Create Rollback GPO 4
-New-GPO -Name "Rollback Set Cipher Suite Order 2019" -Comment "Sets the registry values to set the cipher suite order for server 2019"
+New-GPO -Name "Rollback | Set Cipher Suite Order 2019" -Comment "Sets the registry values to set the cipher suite order for server 2019"
 # Create Rollback GPO 5
-New-GPO -Name "Rollback Set Cipher Suite Order 2022" -Comment "Sets the registry values to set the cipher suite order for server 2022"
+New-GPO -Name "Rollback | Set Cipher Suite Order 2022" -Comment "Sets the registry values to set the cipher suite order for server 2022"
 
 # Set Rollback GPO 1
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 2 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 5 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 6 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 7 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 8 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\WOW6432Node\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 5 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v2.0.50727" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 6 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SystemDefaultTlsVersions" -Value 0 -Type "DWORD" -Order 7 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Enable SCHANNEL for .net" -Context Computer -Key "HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -ValueName "SchUseStrongCrypto" -Value 0 -Type "DWORD" -Order 8 -Action "Update"
 
 # Set Rollback GPO 2
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0" -Order 1 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -Order 2 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "Enabled" -Value 1 -Type "DWORD" -Order 3 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "DisabledByDefault" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1" -Order 5 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Order 6 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "Enabled" -Value 1 -Type "DWORD" -Order 7 -Action "Update"
-Set-GPPrefRegistryValue -Name "Rollback Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "DisabledByDefault" -Value 0 -Type "DWORD" -Order 8 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0" -Order 1 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -Order 2 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "Enabled" -Value 1 -Type "DWORD" -Order 3 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server" -ValueName "DisabledByDefault" -Value 0 -Type "DWORD" -Order 4 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1" -Order 5 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -Order 6 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "Enabled" -Value 1 -Type "DWORD" -Order 7 -Action "Update"
+Set-GPPrefRegistryValue -Name "Rollback | Disable TLS 1.0/1.1" -Context Computer -Key "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server" -ValueName "DisabledByDefault" -Value 0 -Type "DWORD" -Order 8 -Action "Update"
 
 # Set Rollback GPO 3
-Set-GPPrefRegistryValue -Name "Rollback Set Cipher Suite Order 2016" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
+Set-GPPrefRegistryValue -Name "Rollback | Set Cipher Suite Order 2016" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
 
 # Set Rollback GPO 4
-Set-GPPrefRegistryValue -Name "Rollback Set Cipher Suite Order 2019" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
+Set-GPPrefRegistryValue -Name "Rollback | Set Cipher Suite Order 2019" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
 
 # Set Rollback GPO 5
-Set-GPPrefRegistryValue -Name "Rollback Set Cipher Suite Order 2022" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_AES_256_GCM_SHA512,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
+Set-GPPrefRegistryValue -Name "Rollback | Set Cipher Suite Order 2022" -Context Computer -Key "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" -ValueName "Functions" -Value "TLS_AES_256_GCM_SHA512,TLS_AES_256_GCM_SHA384,TLS_CHACHA20_POLY1305_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" -Type "String" -Order 1 -Action "Delete"
 
 #Stop logging
 Stop-Transcript
