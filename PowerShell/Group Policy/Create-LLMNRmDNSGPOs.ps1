@@ -4,7 +4,7 @@
 $DefaultLogLocation = "C:\Windows\Logs\Create-LLMNRmDNS-Log.txt"
 Start-Transcript -Path $DefaultLogLocation
 
-# This creates ten Group Policy Objects (GPO's)
+# This creates four Group Policy Objects (GPO's)
 #  GPO  1 sets the registry to Disable Link-Local Multicast Name Resolution (LLMNR)
 #  GPO  2 sets the registry to Disable Multicast Dynamic Name Resolution (mDNS)
 #  GPO  3 sets the registry to Enable LLMNR as a rollback for if GPO 5 creates issues in the environment

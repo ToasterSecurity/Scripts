@@ -4,7 +4,7 @@
 $DefaultLogLocation = "C:\Windows\Logs\Create-TLSGPOs-Log.txt"
 Start-Transcript -Path $DefaultLogLocation
 
-# This creates eleven Group Policy Objects (GPO's)
+# This creates ten Group Policy Objects (GPO's)
 #  GPO  0 sets the registry to Disable Secure Sockets Layer (SSL) v3 (there is no rollback for this as SSL v3 is disabled by default on all modern Windows Operating Systems, this is an enforcement policy to keep SSL v3 disabled)
 #  GPO  1 sets the registry to Enable .net to use the Windows SCHANNEL configuration instead of the native .net TLS configuration
 #  GPO  2 sets the registry to Disable Transport Layer Security (TLS) 1.0 and 1.1

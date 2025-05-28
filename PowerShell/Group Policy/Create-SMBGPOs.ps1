@@ -4,7 +4,7 @@
 $DefaultLogLocation = "C:\Windows\Logs\Create-SMBGPOs-Log.txt"
 Start-Transcript -Path $DefaultLogLocation
 
-# This creates ten Group Policy Objects (GPO's)
+# This creates fourteen Group Policy Objects (GPO's)
 #  GPO  1 sets the registry to Disable Server Message Block (SMB) v1 Server
 #  GPO  2 sets the registry to Disable SMB v2
 #  GPO  3 sets the registry to Enable SMB signing as available

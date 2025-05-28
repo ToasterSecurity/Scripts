@@ -6,7 +6,7 @@ Require LDAP Signing
 $DefaultLogLocation = "C:\Windows\Logs\Create-LDAPGPOs-Log.txt"
 Start-Transcript -Path $DefaultLogLocation
 
-# This creates ten Group Policy Objects (GPO's)
+# This creates three Group Policy Objects (GPO's)
 #  GPO  1 sets the registry to Enable LDAP Signing
 #  GPO  2 sets the registry to Require LDAP Signing
 #  GPO  3 sets the registry to Disable LDAP Signing 
