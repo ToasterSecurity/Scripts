@@ -1,5 +1,3 @@
-Require LDAP Signing
-
 #Requires -RunAsAdministrator
 
 # Start logging
